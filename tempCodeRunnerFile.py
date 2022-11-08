@@ -1,2 +1,2 @@
-
-hubo.turn_left()
+if (hubo.on_beeper()):
+        hubo.pick_beeper()
