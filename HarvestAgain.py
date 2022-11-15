@@ -2,7 +2,7 @@ from cs1robots import *
 
 global count
 
-load_world("hubo/worlds/harvest2.wld")
+load_world("worlds/harvest2.wld")
 
 hubo = Robot()
 hubo.set_trace("red")
