@@ -27,5 +27,9 @@ while (not hubo.on_beeper()):
 
     if (hubo.front_is_clear()):
         hubo.move()
+        if (hubo.on_beeper()):
+            hubo.pick_beeper()
     elif (hubo.left_is_clear()):
         jump_one_hurdle()
+        if (hubo.on_beeper()):
+            hubo.pick_beeper()
