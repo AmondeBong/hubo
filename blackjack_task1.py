@@ -73,6 +73,7 @@ def ask_yesno() -> bool:
     play = True
     # 7. prompt를 보여주고, user가 y나 n를 입력하게 함, y이면 True를 반환, n이면 False를 반환 둘 다 아니면 "I beg your pardon"
     while (play):
+        print()
         select = str(input('Would you like another card? (y/n) ----> '))
         if (select == 'y' or select == 'Y'):
             play = False
@@ -81,6 +82,7 @@ def ask_yesno() -> bool:
             play = False
             return False
         else:
+            print()
             print('I beg your pardon')
 
 
@@ -102,28 +104,38 @@ def blackjack() -> int:
     #  Dealer is dealt a King of Diamonds.
     #  your total is 11
 
-    i = 0
-    j = 0
-    player_cards.append(deck.cards[i])
-    print('You are dealt'+player_cards[i].__str__())
-    deck.draw()
-    i += 1
+    i = len(deck.cards)-1  # card의  인덱스
 
-    dealer_cards.append(deck.cards[j])
+    a = 0  # player_cards의 인덱스
+    b = 0  # dealer_cards의 인덱스
+
+    player_cards.append(deck.cards[i])
+    print('You are dealt '+player_cards[a].__str__())
+
+    deck.draw()
+    i -= 1
+    a += 1
+
+    dealer_cards.append(deck.cards[i])
     print('Dealer is dealt a hidden_card')
-    hidden_card = deck.cards[j]
+    print()
+    hidden_card = deck.cards[b]
     deck.draw()
-    j += 1
+    i -= 1
+    b += 1
 
     player_cards.append(deck.cards[i])
-    print('You are dealt'+player_cards[i].__str__())
-    deck.draw()
-    i += 1
+    print('You are dealt '+player_cards[a].__str__())
 
-    dealer_cards.append(deck.cards[j])
-    print('Dealer is dealt'+dealer_cards[j].__str__())
     deck.draw()
-    j += 1
+    i -= 1
+    a += 1
+
+    dealer_cards.append(deck.cards[i])
+    print('Dealer is dealt '+dealer_cards[b].__str__())
+    deck.draw()
+    i -= 1
+    b += 1
 
     print('your total is '+str(hand_value(player_cards)))
 
@@ -139,10 +151,13 @@ def blackjack() -> int:
     if (hand_value(player_cards) < 21):
         if (ask_yesno()):
             player_cards.append(deck.cards[i])
-            print('You are dealt '+player_cards[i].__str__())
+            print('You are dealt '+player_cards[a].__str__())
             deck.draw()
-            i += 1
+            i -= 1
+            a += 1
+
             print('your total is '+str(hand_value(player_cards)))
+            print()
             if (hand_value(player_cards) >= 21):
                 print('You went over 21! You lost')
                 return -1
@@ -155,11 +170,12 @@ def blackjack() -> int:
             # "The dealer's total is 20"
             #  17보다 크면 아래로 넘어감
     print("The dealer's hidden card was "+str(hidden_card.__str__()))
-    if (hand_value(dealer_cards) < 17):
-        dealer_cards.append(deck.cards[j])
-        print('Dealer is dealt '+dealer_cards[j].__str__())
+    if (hand_value(dealer_cards) <= 17):
+        dealer_cards.append(deck.cards[i])
+        print('Dealer is dealt '+dealer_cards[b].__str__())
         deck.draw()
-        j += 1
+        i -= 1
+        b += 1
         print("The dealer's total is " + str(hand_value(dealer_cards)))
 
         # 11. player의 total 점수와, dealer의 total 점수를 프린트 해주고
@@ -173,6 +189,7 @@ def blackjack() -> int:
 
     print('your total is '+str(hand_value(player_cards)))
     print("The dealer's total is " + str(hand_value(dealer_cards)))
+
     if (hand_value(dealer_cards) >= 21):
         print("The dealer went over 21! You win!")
         return 1
