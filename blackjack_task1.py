@@ -104,7 +104,7 @@ def blackjack() -> int:
     #  Dealer is dealt a King of Diamonds.
     #  your total is 11
 
-    i = len(deck.cards)-1  # card의  인덱스
+    i = len(deck.cards)-1  # deck의 인덱스
 
     a = 0  # player_cards의 인덱스
     b = 0  # dealer_cards의 인덱스
@@ -118,7 +118,6 @@ def blackjack() -> int:
 
     dealer_cards.append(deck.cards[i])
     print('Dealer is dealt a hidden_card')
-    print()
     hidden_card = deck.cards[b]
     deck.draw()
     i -= 1
@@ -187,6 +186,7 @@ def blackjack() -> int:
         # "You lost" 프린트하고 -1 반환 혹은
         # "You have a tie" 를 프린트하고, 0 반환
 
+    print()
     print('your total is '+str(hand_value(player_cards)))
     print("The dealer's total is " + str(hand_value(dealer_cards)))
 

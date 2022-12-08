@@ -1,2 +1,1 @@
 
-giraffe.add(eyes1)
